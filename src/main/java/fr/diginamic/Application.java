@@ -37,17 +37,23 @@ public class Application extends AbstractApplication {
 	public void main() {
 		addMenu(1, "File");
 		addMenu(2, "Gestion clients");
-		addMenu(3, "Exemples");
+		addMenu(3, "Gestion vehicules");
+		addMenu(4, "Gestion locations");
+		addMenu(5, "Exemples");
 		
 		addMenuOption(1, "Aide", new AideService());
 		
-		//addMenuOption(2, "Liste des clients", new AideService());
+		addMenuOption(2, "Liste des clients", new AideService());
 		
-		addMenuOption(3, "Exemple 1 - Titres", new Exemple1Service());
-		addMenuOption(3, "Exemple 2 - Textes de couleur", new Exemple2Service());
-		addMenuOption(3, "Exemple 3 - Table", new Exemple3Service());
-		addMenuOption(3, "Exemple 4 - Table avec liens vers méthodes", new Exemple4Service());
-		addMenuOption(3, "Exemple 5 - Table dynamique", new Exemple5Service());
-		addMenuOption(3, "Exemple 6 - Formulaire", new Exemple6Service());
+		addMenuOption(3, "Liste des vehicules", new AideService());
+		
+		addMenuOption(4, "Liste des locations", new AideService());
+		
+		addMenuOption(5, "Exemple 1 - Titres", new Exemple1Service());
+		addMenuOption(5, "Exemple 2 - Textes de couleur", new Exemple2Service());
+		addMenuOption(5, "Exemple 3 - Table", new Exemple3Service());
+		addMenuOption(5, "Exemple 4 - Table avec liens vers méthodes", new Exemple4Service());
+		addMenuOption(5, "Exemple 5 - Table dynamique", new Exemple5Service());
+		addMenuOption(5, "Exemple 6 - Formulaire", new Exemple6Service());
 	}
 }
