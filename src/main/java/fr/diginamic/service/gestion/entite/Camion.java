@@ -19,6 +19,33 @@ public class Camion extends Vehicule {
 	@ManyToOne
 	@JoinColumn(name="id_camion_type")
 	private CamionType camionType;
+	
+	
+	public Camion() {
+		super();
+	}
+
+	public Camion(double volume, CamionType camionType) {
+		super();
+		this.volume = volume;
+		this.camionType = camionType;
+	}
+
+	public double getVolume() {
+		return volume;
+	}
+
+	public void setVolume(double volume) {
+		this.volume = volume;
+	}
+
+	public CamionType getCamionType() {
+		return camionType;
+	}
+
+	public void setCamionType(CamionType camionType) {
+		this.camionType = camionType;
+	}
 
 	
 	

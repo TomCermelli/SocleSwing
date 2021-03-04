@@ -21,6 +21,9 @@ public class VoitureType {
 
 	@Column(name = "type", nullable = false)
 	private String type;
+	
+	@Column(name="tarif", nullable = false)
+	private double tarif;
 
 	@OneToMany(mappedBy = "voitureType")
 	private List<Voiture> voiture;
@@ -29,10 +32,10 @@ public class VoitureType {
 		super();
 	}
 
-	public VoitureType(String type, List<Voiture> voiture) {
+	public VoitureType(String type, double tarif) {
 		super();
 		this.type = type;
-		this.voiture = voiture;
+		this.tarif = tarif;
 	}
 
 	public int getId() {
@@ -50,6 +53,18 @@ public class VoitureType {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	
+
+	public double getTarif() {
+		return tarif;
+	}
+
+
+	public void setTarif(double tarif) {
+		this.tarif = tarif;
+	}
+
 
 	public List<Voiture> getVoiture() {
 		return voiture;

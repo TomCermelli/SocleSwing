@@ -21,6 +21,9 @@ public class CamionType {
 
 	@Column(name = "type", nullable = false)
 	private String type;
+	
+	@Column(name="montant", nullable = false)
+	private double montant;
 
 	@OneToMany(mappedBy = "camionType")
 	private List<Camion> camion;
@@ -29,10 +32,10 @@ public class CamionType {
 		super();
 	}
 
-	public CamionType(String type, List<Camion> camion) {
+	public CamionType(String type, Double montant) {
 		super();
 		this.type = type;
-		this.camion = camion;
+		this.montant = montant;
 	}
 
 	public int getId() {
@@ -49,6 +52,14 @@ public class CamionType {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public double getMontant() {
+		return montant;
+	}
+
+	public void setMontant(double montant) {
+		this.montant = montant;
 	}
 
 	public List<Camion> getCamion() {

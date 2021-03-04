@@ -1,5 +1,7 @@
 package fr.diginamic.service.gestion.entite;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -20,10 +22,10 @@ public class Client {
 	@Column(name = "id", nullable = false)
 	private int id;
 
-	@Column(name = "id", nullable = false)
+	@Column(name = "nom", nullable = false)
 	private String nom;
 
-	@Column(name = "id", nullable = false)
+	@Column(name = "prenom", nullable = false)
 	private String prenom;
 
 	@Embedded
@@ -34,19 +36,17 @@ public class Client {
 	private Permis permis;
 
 	@OneToMany(mappedBy = "client")
-	private Location location;
+	private List<Location> location;
 
 	public Client() {
 		super();
 	}
 
-	public Client(String nom, String prenom, Adresse adresse, Permis permis, Location location) {
+	public Client(String nom, String prenom, Adresse adresse) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
-		this.permis = permis;
-		this.location = location;
 	}
 
 	public int getId() {
@@ -89,12 +89,14 @@ public class Client {
 		this.permis = permis;
 	}
 
-	public Location getLocation() {
+	public List<Location> getLocation() {
 		return location;
 	}
 
-	public void setLocation(Location location) {
+	public void setLocation(List<Location> location) {
 		this.location = location;
 	}
+
+	
 
 }

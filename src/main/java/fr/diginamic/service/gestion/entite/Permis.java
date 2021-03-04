@@ -12,25 +12,25 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="permis")
+@Table(name = "permis")
 public class Permis {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private int id;
-	
+
 	@Column(name = "type", nullable = false)
 	private String type;
-	
+
 	@Column(name = "numero_permis", nullable = false)
 	private int numero;
-	
+
 	@Column(name = "date_obtention", nullable = false)
 	private Date dateObtention;
-	
+
 	@OneToOne
-	@JoinColumn(name="id_permis")
+	@JoinColumn(name = "id_permis")
 	private Client client;
 
 	public Permis() {
@@ -84,7 +84,5 @@ public class Permis {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	
-	
 
 }

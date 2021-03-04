@@ -19,4 +19,32 @@ public class Voiture extends Vehicule{
 	
 	
 
+	public Voiture() {
+		super();
+	}
+
+	public Voiture(int nombrePlace, VoitureType voitureType) {
+		super();
+		this.nombrePlace = nombrePlace;
+		this.voitureType = voitureType;
+	}
+
+	public int getNombrePlace() {
+		return nombrePlace;
+	}
+
+	public void setNombrePlace(int nombrePlace) {
+		this.nombrePlace = nombrePlace;
+	}
+
+	public VoitureType getVoitureType() {
+		return voitureType;
+	}
+
+	public void setVoitureType(VoitureType voitureType) {
+		this.voitureType = voitureType;
+	}
+	
+	
+
 }

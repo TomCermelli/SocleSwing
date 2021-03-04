@@ -34,6 +34,10 @@ public class Adresse {
 	
 	
 
+	public Adresse() {
+		super();
+	}
+
 	public Adresse(int numeroRue, String libelleRue, int codePostal, String ville, int numeroTel, String email) {
 		super();
 		this.numeroRue = numeroRue;
