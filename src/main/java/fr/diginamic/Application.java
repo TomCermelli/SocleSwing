@@ -1,5 +1,8 @@
 package fr.diginamic;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import fr.diginamic.composants.AbstractApplication;
 import fr.diginamic.services.exemples.AideService;
 import fr.diginamic.services.exemples.Exemple1Service;
@@ -23,6 +26,7 @@ public class Application extends AbstractApplication {
 
 	/** serialVersionUID */
 	private static final long serialVersionUID = 6755835482616236832L;
+	
 	
 	/** Constructeur
 	 * @param title titre

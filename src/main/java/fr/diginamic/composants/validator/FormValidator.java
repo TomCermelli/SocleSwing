@@ -1,5 +1,9 @@
 package fr.diginamic.composants.validator;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import fr.diginamic.composants.Console;
 import fr.diginamic.composants.ui.Form;
 
@@ -9,6 +13,7 @@ import fr.diginamic.composants.ui.Form;
  */
 public abstract class FormValidator {
 	
+	protected static EntityManagerFactory emf = Persistence.createEntityManagerFactory("location-agency");
 	/** Console pour générer l'alerte */
 	protected Console console = new Console();
 
