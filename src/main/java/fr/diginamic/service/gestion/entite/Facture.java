@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +31,10 @@ public class Facture {
 	@ManyToOne
 	@JoinColumn(name="id_facture_type")
 	private FactureType factureType;
+	
+	@OneToOne
+	@JoinColumn(name="id_location")
+	private Location location;
 	
 	public Facture() {
 		super();
@@ -81,9 +86,12 @@ public class Facture {
 	public void setFactureType(FactureType factureType) {
 		this.factureType = factureType;
 	}
-	
-	
 
-	
-	
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}	
 }

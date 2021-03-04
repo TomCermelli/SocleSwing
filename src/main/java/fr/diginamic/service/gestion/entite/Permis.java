@@ -30,7 +30,7 @@ public class Permis {
 	private Date dateObtention;
 
 	@OneToOne
-	@JoinColumn(name = "id_permis")
+	@JoinColumn(name = "id_client")
 	private Client client;
 
 	public Permis() {

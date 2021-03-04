@@ -51,14 +51,10 @@ public class Location {
 	@JoinColumn(name="id_facture")
 	private Facture facture;
 	
-	
-
 	public Location() {
 		super();
 	}
 	
-	
-
 	public Location(Date dateReservation, Date dateFinPrevu, double kilometrageDebut, Client client,
 			Vehicule vehicule) {
 		super();
