@@ -1,4 +1,4 @@
-package fr.diginamic.gestion.dao;
+package fr.diginamic.services.gestion.entite.dao;
 
 import java.io.IOException;
 import java.util.List;
@@ -7,8 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
-import fr.diginamic.service.gestion.entite.CamionType;
-import fr.diginamic.service.gestion.entite.VoitureType;
+import fr.diginamic.services.gestion.entite.CamionType;
+import fr.diginamic.services.gestion.entite.VoitureType;
 
 public class CamionTypeDao extends AbstractDao {
 	

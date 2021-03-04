@@ -1,4 +1,4 @@
-package fr.diginamic.gestion.dao;
+package fr.diginamic.services.gestion.entite.dao;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

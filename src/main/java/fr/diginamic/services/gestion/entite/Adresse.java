@@ -1,4 +1,4 @@
-package fr.diginamic.service.gestion.entite;
+package fr.diginamic.services.gestion.entite;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

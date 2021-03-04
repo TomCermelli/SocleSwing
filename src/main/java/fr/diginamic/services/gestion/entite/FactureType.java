@@ -1,4 +1,4 @@
-package fr.diginamic.service.gestion.entite;
+package fr.diginamic.services.gestion.entite;
 
 import java.util.List;
 
@@ -11,31 +11,29 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "voiture_type")
-public class VoitureType {
-
+@Table(name="facture_type")
+public class FactureType {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private int id;
-
-	@Column(name = "type", nullable = false)
+	
+	@Column(name="type")
 	private String type;
 	
-	@Column(name="tarif", nullable = false)
-	private double tarif;
+	@OneToMany(mappedBy = "factureType")
+	private List<Facture> facture;
 
-	@OneToMany(mappedBy = "voitureType")
-	private List<Voiture> voiture;
-
-	public VoitureType() {
+	
+	
+	public FactureType() {
 		super();
 	}
 
-	public VoitureType(String type, double tarif) {
+	public FactureType(String type) {
 		super();
 		this.type = type;
-		this.tarif = tarif;
 	}
 
 	public int getId() {
@@ -53,25 +51,17 @@ public class VoitureType {
 	public void setType(String type) {
 		this.type = type;
 	}
+
+	public List<Facture> getFacture() {
+		return facture;
+	}
+
+	public void setFacture(List<Facture> facture) {
+		this.facture = facture;
+	}
 	
 	
-
-	public double getTarif() {
-		return tarif;
-	}
-
-
-	public void setTarif(double tarif) {
-		this.tarif = tarif;
-	}
-
-
-	public List<Voiture> getVoiture() {
-		return voiture;
-	}
-
-	public void setVoiture(List<Voiture> voiture) {
-		this.voiture = voiture;
-	}
+	
+	
 
 }
