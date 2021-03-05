@@ -67,12 +67,12 @@ public class TypeService extends MenuService {
 					+ 	 "</section>"
 					+"</section>"
 					+"<section>"
-					+"<table cellspacing=0>"
+					+"<table class='table' cellspacing=0> "
 					+	"<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Type</td><td>Tarif</td></tr>";
 		
 		for (int i=0; i<voitureTypeList.size(); i++) {
 					html += "<tr>"
-						  + "  <td><a class='btn-blue' href='modifitication(" + voitureTypeList.get(i).getId() + ")'><img width=25 src='images/pencil-blue-xs.png'></a></td>"
+						  + "  <td><a class='btn-blue' href='modification(" + voitureTypeList.get(i).getId() + ")'><img width=25 src='images/pencil-blue-xs.png'></a></td>"
 						  + "  <td><a class='btn-red' href='suppression(" + voitureTypeList.get(i).getId() + ")'><img width=25 src='images/trash-red-xs.png'></a></td>"
 						  + "  <td width='150px'>" + voitureTypeList.get(i).getType() + "</td>"
 						  + "  <td width='150px'>" + voitureTypeList.get(i).getTarif() + "</td>"
@@ -80,11 +80,12 @@ public class TypeService extends MenuService {
 		}
 		
 			html += "</table>"
+				 + "<table>"
 				 + "<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Type</td><td>Tarif</td></tr>";
 			
 		for(CamionType camion : camionTypeList) {
 			html += "<tr>"
-					  + "  <td><a class='btn-blue' href='modifitication(" + camion.getId() + ")'><img width=25 src='images/pencil-blue-xs.png'></a></td>"
+					  + "  <td><a class='btn-blue' href='modification(" + camion.getId() + ")'><img width=25 src='images/pencil-blue-xs.png'></a></td>"
 					  + "  <td><a class='btn-red' href='suppression(" + camion.getId() + ")'><img width=25 src='images/trash-red-xs.png'></a></td>"
 					  + "  <td width='150px'>" + camion.getType() + "</td>"
 					  + "  <td width='150px'>" + camion.getMontant() + "</td>"
@@ -92,6 +93,7 @@ public class TypeService extends MenuService {
 		}
 		
 		console.print(html);
+		
 	}
 	
 	//----------------------------  CRUD des type de voiture ---------------------------- 
@@ -132,7 +134,7 @@ public class TypeService extends MenuService {
 	 * 
 	 * @param id
 	 * */
-	public void modifitication(int id) {
+	public void modification(Integer id) {
 		TypeValidator validator = new TypeValidator();
 		VoitureTypeDao voitureTypeDao = new VoitureTypeDao();
 		
@@ -162,7 +164,7 @@ public class TypeService extends MenuService {
 	 * 
 	 * @param id
 	 * */
-	public void suppression(int id) {
+	public void suppression(Integer id) {
 		boolean result = console.confirm("Suppression de l'item " + id, "Confirmez-vous la suppression de l'item n°"+id);
 		traitement();
 	}

@@ -70,7 +70,7 @@ public class ReflectUtils {
 				callMethod(classe, methodName, null);
 			}
 			else {
-				Long id = Long.parseLong(parameter);	
+				Integer id = Integer.parseInt(parameter);	
 				callMethod(classe, methodName, id);
 			}
 		}
@@ -85,7 +85,7 @@ public class ReflectUtils {
 				callMethod(classe, methodName, null);
 			}
 			else {
-				Long id = Long.parseLong(parameter);
+				Integer id = Integer.parseInt(parameter);
 				callMethod(classe, methodName, id);
 			}
 		}
@@ -96,7 +96,7 @@ public class ReflectUtils {
 	 * @param methodName nom de la méthode
 	 * @param id identifiant
 	 */
-	private static void callMethod(Class<?> classe, String methodName, Long id) {
+	private static void callMethod(Class<?> classe, String methodName, Integer id) {
 		Object obj = null;
 		try {
 			if (classe != null) {
@@ -115,7 +115,7 @@ public class ReflectUtils {
 		try {
 			Method method = null;
 			if (id!=null) {
-				method = classe.getDeclaredMethod(methodName, Long.class);
+				method = classe.getDeclaredMethod(methodName, Integer.class);
 				method.setAccessible(true);
 				method.invoke(obj, id);
 			}
