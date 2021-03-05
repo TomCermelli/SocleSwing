@@ -14,6 +14,7 @@ import fr.diginamic.composants.db.SqlUtils;
 import fr.diginamic.composants.ui.Form;
 import fr.diginamic.composants.ui.TextField;
 import fr.diginamic.services.exemples.entite.Personne;
+import fr.diginamic.services.gestion.entite.VoitureType;
 
 public class Exemple5Service extends MenuService {
 
@@ -100,5 +101,7 @@ public class Exemple5Service extends MenuService {
 		boolean result = console.confirm("Suppression de l'item " + id, "Confirmez-vous la suppression de l'item n°"+id);
 		console.println(""+result);
 	}
+	
+
 
 }

@@ -5,6 +5,6 @@ import javax.persistence.Persistence;
 
 public class AbstractDao {
 	
-	public static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Locationdb");
+	public static EntityManagerFactory emf = Persistence.createEntityManagerFactory("location-agency");
 
 }

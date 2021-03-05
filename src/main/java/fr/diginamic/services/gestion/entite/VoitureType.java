@@ -19,7 +19,7 @@ public class VoitureType {
 	@Column(name = "id", nullable = false)
 	private int id;
 
-	@Column(name = "type", nullable = false)
+	@Column(name = "type", nullable = false, unique = true)
 	private String type;
 	
 	@Column(name="tarif", nullable = false)
