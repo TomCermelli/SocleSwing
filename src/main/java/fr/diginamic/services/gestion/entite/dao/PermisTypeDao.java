@@ -1,6 +1,5 @@
 package fr.diginamic.services.gestion.entite.dao;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,20 +8,19 @@ import javax.persistence.TypedQuery;
 
 import fr.diginamic.composants.ui.Form;
 import fr.diginamic.services.gestion.entite.CamionType;
-import fr.diginamic.services.gestion.entite.VoitureType;
+import fr.diginamic.services.gestion.entite.Permis;
 
-public class CamionTypeDao extends AbstractDao {
-	
+public class PermisTypeDao extends AbstractDao {
 	private EntityManager em = emf.createEntityManager();
 
 	private EntityTransaction transaction = em.getTransaction();
+	
+	public List<Permis> selectAll() {
 
-	public List<CamionType> selectAll() {
+		TypedQuery<Permis> query = em.createQuery("SELECT p FROM Permis p", Permis.class);
+		List<Permis> permisTypeList = query.getResultList();
 
-		TypedQuery<CamionType> query = em.createQuery("SELECT c FROM CamionType c", CamionType.class);
-		List<CamionType> camionTypeList = query.getResultList();
-
-		return camionTypeList;
+		return permisTypeList;
 	}
 
 	public void insert(CamionType camionType) {

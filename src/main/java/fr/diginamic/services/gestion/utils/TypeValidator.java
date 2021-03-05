@@ -45,12 +45,6 @@ public class TypeValidator extends FormValidator {
 	}
 	
 	
-	
-	public boolean validateCamion() {
-		
-		return true;
-	}
-	
 	public boolean validatePermis() {
 		
 		return true;

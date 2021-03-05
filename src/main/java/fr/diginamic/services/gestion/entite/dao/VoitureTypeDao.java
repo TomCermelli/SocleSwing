@@ -17,6 +17,13 @@ public class VoitureTypeDao extends AbstractDao {
 
 	private EntityTransaction transaction = em.getTransaction();
 
+	
+	/*
+	 * Cette méthode sélectionne tout les éléments en base de VoitureType,
+	 * la méthode renvoie ensuite le résultat de cette query sous forme de liste
+	 * 
+	 * 
+	 * */
 	public List<VoitureType> selectAll() {
 
 		TypedQuery<VoitureType> query = em.createQuery("SELECT v FROM VoitureType v", VoitureType.class);
@@ -24,7 +31,13 @@ public class VoitureTypeDao extends AbstractDao {
 
 		return voitureTypeList;
 	}
-
+	
+	/*
+	 * On donne en paramètre un objet courant de type VoitureType pour l'inséré en base 
+	 * l'élément donnée est vérifié dans une class validator dans le service correspondant 
+	 * 
+	 * @param un objet de type VoitureType
+	 * */
 	public void insert(VoitureType voitureType) {
 
 		transaction.begin();
@@ -33,6 +46,7 @@ public class VoitureTypeDao extends AbstractDao {
 		System.out.println("Votre insertion s'est bien réalisé");
 	}
 
+	
 	public void update(VoitureType voitureType, Form form) {
 	
 		transaction.begin();

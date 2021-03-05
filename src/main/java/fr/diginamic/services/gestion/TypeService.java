@@ -14,7 +14,11 @@ import fr.diginamic.composants.ui.Form;
 import fr.diginamic.composants.ui.TextField;
 import fr.diginamic.services.exemples.Exemple5FormValidator;
 import fr.diginamic.services.exemples.entite.Personne;
+import fr.diginamic.services.gestion.entite.CamionType;
+import fr.diginamic.services.gestion.entite.Permis;
 import fr.diginamic.services.gestion.entite.VoitureType;
+import fr.diginamic.services.gestion.entite.dao.CamionTypeDao;
+import fr.diginamic.services.gestion.entite.dao.PermisTypeDao;
 import fr.diginamic.services.gestion.entite.dao.VoitureTypeDao;
 import fr.diginamic.services.gestion.utils.TypeValidator;
 
@@ -31,8 +35,12 @@ public class TypeService extends MenuService {
 	public void traitement() {
 
 		VoitureTypeDao voitureTypeDao = new VoitureTypeDao();
+		CamionTypeDao camionTypeDao = new CamionTypeDao();
+		PermisTypeDao permisTypeDao = new PermisTypeDao();
 		
 		List<VoitureType> voitureTypeList = voitureTypeDao.selectAll();
+		List<CamionType> camionTypeList = camionTypeDao.selectAll();
+		List<Permis> permisTypeList = permisTypeDao.selectAll();
 		
 
 		console.clear();
@@ -58,16 +66,29 @@ public class TypeService extends MenuService {
 					+ 		"</section>"
 					+ 	 "</section>"
 					+"</section>"
+					+"<section>"
 					+"<table cellspacing=0>"
-					+	"<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Type</td><td>Tarif</td></tr>";;
+					+	"<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Type</td><td>Tarif</td></tr>";
 		
 		for (int i=0; i<voitureTypeList.size(); i++) {
+					html += "<tr>"
+						  + "  <td><a class='btn-blue' href='modifitication(" + voitureTypeList.get(i).getId() + ")'><img width=25 src='images/pencil-blue-xs.png'></a></td>"
+						  + "  <td><a class='btn-red' href='suppression(" + voitureTypeList.get(i).getId() + ")'><img width=25 src='images/trash-red-xs.png'></a></td>"
+						  + "  <td width='150px'>" + voitureTypeList.get(i).getType() + "</td>"
+						  + "  <td width='150px'>" + voitureTypeList.get(i).getTarif() + "</td>"
+						  +"</tr>";
+		}
+		
+			html += "</table>"
+				 + "<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Type</td><td>Tarif</td></tr>";
+			
+		for(CamionType camion : camionTypeList) {
 			html += "<tr>"
-				  + "  <td><a class='btn-blue' href='modifitication(" + voitureTypeList.get(i).getId() + ")'><img width=25 src='images/pencil-blue-xs.png'></a></td>"
-				  + "  <td><a class='btn-red' href='suppression(" + voitureTypeList.get(i).getId() + ")'><img width=25 src='images/trash-red-xs.png'></a></td>"
-				  + "  <td width='150px'>" + voitureTypeList.get(i).getType() + "</td>"
-				  + "  <td width='150px'>" + voitureTypeList.get(i).getTarif() + "</td>"
-				  +"</tr>";
+					  + "  <td><a class='btn-blue' href='modifitication(" + camion.getId() + ")'><img width=25 src='images/pencil-blue-xs.png'></a></td>"
+					  + "  <td><a class='btn-red' href='suppression(" + camion.getId() + ")'><img width=25 src='images/trash-red-xs.png'></a></td>"
+					  + "  <td width='150px'>" + camion.getType() + "</td>"
+					  + "  <td width='150px'>" + camion.getMontant() + "</td>"
+					  +"</tr>";
 		}
 		
 		console.print(html);
@@ -79,22 +100,28 @@ public class TypeService extends MenuService {
 	public void creation() {
 		TypeValidator validator = new TypeValidator();
 		VoitureTypeDao voitureTypeDao = new VoitureTypeDao();
+		
 		Form form = new Form();
 		// On ajoute au formulaire 2 champs de type texte pour permettre de modifier le nom et le prénom du client
 				form.addInput(new TextField("Type:", "type de voiture"));
 				form.addInput(new TextField("Tarif:", "tarif"));	
-			
+		// La console permet de matérialisé notre formulaire au niveau de l'IHM ( notre vue )
 		console.input("Création d'un type", form, validator);
+		
+		// On passe le formulaire remplit par l'utilisateur dans un validator
+		// Si tout les champs correspond à ce que l'ont veut on revoit un boolean à true
 		boolean valide = validator.validate(form);
+		// Si le formulaire a passé la batterie de test, nous envoyé ces données en base
 		if(valide) {
 			String type_voiture = form.getValue("type de voiture");
 			Double tarif = Double.parseDouble(form.getValue("tarif"));	
 			
 			VoitureType voitureType = new VoitureType(type_voiture, tarif);
 			voitureTypeDao.insert(voitureType);
-			
-			
 		}
+		
+		// Une fois la création terminé il faut rappeller la fonction traitement pour avoir un "rafraichissement" des données
+		traitement();
 		
 	}
 	
