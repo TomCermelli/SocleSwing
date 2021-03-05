@@ -34,8 +34,8 @@ public abstract class Vehicule {
 	@Column(name = "statut", nullable = false)
 	private String statut = "disponible";
 
-	@Column(name = "kilométrage", nullable = false)
-	private double kilométrage;
+	@Column(name = "kilometrage", nullable = false)
+	private double kilometrage;
 
 	@OneToMany(mappedBy = "vehicule")
 	private List<Maintenance> maintenance;
@@ -47,13 +47,13 @@ public abstract class Vehicule {
 		super();
 	}
 
-	public Vehicule(String marque, String modèle, String immatriculation, String statut, double kilométrage) {
+	public Vehicule(String marque, String modèle, String immatriculation, String statut, double kilometrage) {
 		super();
 		this.marque = marque;
 		this.modèle = modèle;
 		this.immatriculation = immatriculation;
 		this.statut = statut;
-		this.kilométrage = kilométrage;
+		this.kilometrage = kilometrage;
 	}
 
 	public int getId() {
@@ -96,12 +96,12 @@ public abstract class Vehicule {
 		this.statut = statut;
 	}
 
-	public double getKilométrage() {
-		return kilométrage;
+	public double getKilometrage() {
+		return kilometrage;
 	}
 
-	public void setKilométrage(double kilométrage) {
-		this.kilométrage = kilométrage;
+	public void setKilometrage(double kilométrage) {
+		this.kilometrage = kilométrage;
 	}
 
 	public List<Maintenance> getMaintenance() {

@@ -46,23 +46,23 @@ public class TypeService extends MenuService {
 		console.clear();
 		console.print("<h1 class='bg-dark'><center>Création de type <br> Voiture / Camion / Permis</center></h1>");
 
-		String html ="<section>"
+		String html ="<section class='d-flex'>"
 					+	 "<section>"
-					+ 		"<section>"
+					+ 		"<section class='d-flex fd-vertical'>"
 					+			"<p>Création d'un type de Voiture</p>"
 					+ 			"<button><a class='btn-blue' href='creation()'><img width=25 src='images/plus-blue.png'></a></button>"
 					+ 		"</section>"
 					+ 	 "</section>"
-					+	 "<section>"
+					+	 "<section class='d-flex fd-vertical'>"
 					+ 		"<section>"
 					+			"<p>Création d'un type de Camion</p>"
-					+ 			"<button></button>"
+					+ 			"<button><a class='btn-blue' href='creationCamion()'><img width=25 src='images/plus-blue.png'></a></button>"
 					+ 		"</section>"
 					+ 	 "</section>"
-					+ 	"<section>"
+					+ 	"<section class='d-flex fd-vertical'>"
 					+ 		"<section>"
 					+			"<p>Création d'un type de Permis</p>"
-					+ 			"<button></button>"
+					+ 			"<button><a class='btn-blue' href='creationPermis()'><img width=25 src='images/plus-blue.png'></a></button>"
 					+ 		"</section>"
 					+ 	 "</section>"
 					+"</section>"
@@ -70,16 +70,17 @@ public class TypeService extends MenuService {
 					+"<table class='table' cellspacing=0> "
 					+	"<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Type</td><td>Tarif</td></tr>";
 		
-		for (int i=0; i<voitureTypeList.size(); i++) {
+		for (VoitureType voiture : voitureTypeList) {
 					html += "<tr>"
-						  + "  <td><a class='btn-blue' href='modification(" + voitureTypeList.get(i).getId() + ")'><img width=25 src='images/pencil-blue-xs.png'></a></td>"
-						  + "  <td><a class='btn-red' href='suppression(" + voitureTypeList.get(i).getId() + ")'><img width=25 src='images/trash-red-xs.png'></a></td>"
-						  + "  <td width='150px'>" + voitureTypeList.get(i).getType() + "</td>"
-						  + "  <td width='150px'>" + voitureTypeList.get(i).getTarif() + "</td>"
+						  + "  <td><a class='btn-blue' href='modification(" + voiture.getId() + ")'><img width=25 src='images/pencil-blue-xs.png'></a></td>"
+						  + "  <td><a class='btn-red' href='suppression(" + voiture.getId() + ")'><img width=25 src='images/trash-red-xs.png'></a></td>"
+						  + "  <td width='150px'>" + voiture.getType() + "</td>"
+						  + "  <td width='150px'>" + voiture.getTarif() + "</td>"
 						  +"</tr>";
 		}
 		
 			html += "</table>"
+				 + "<section>"
 				 + "<table>"
 				 + "<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Type</td><td>Tarif</td></tr>";
 			
@@ -92,8 +93,22 @@ public class TypeService extends MenuService {
 					  +"</tr>";
 		}
 		
-		console.print(html);
+		html += "</table>"
+				 + "<section>"
+				 + "<table>"
+				 + "<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Type</td><td>Numero</td><td>Date d'obtention</td></tr>";
 		
+		for(Permis permis : permisTypeList) {
+			html += "<tr>"
+					  + "  <td><a class='btn-blue' href='modification(" + permis.getId() + ")'><img width=25 src='images/pencil-blue-xs.png'></a></td>"
+					  + "  <td><a class='btn-red' href='suppression(" + permis.getId() + ")'><img width=25 src='images/trash-red-xs.png'></a></td>"
+					  + "  <td width='150px'>" + permis.getType() + "</td>"
+					  + "  <td width='150px'>" + permis.getNumero() + "</td>"
+					  + "  <td width='150px'>" + permis.getDateObtention()+ "</td>"
+					  +"</tr>";
+		}
+		
+		console.print(html);
 	}
 	
 	//----------------------------  CRUD des type de voiture ---------------------------- 
@@ -121,10 +136,8 @@ public class TypeService extends MenuService {
 			VoitureType voitureType = new VoitureType(type_voiture, tarif);
 			voitureTypeDao.insert(voitureType);
 		}
-		
 		// Une fois la création terminé il faut rappeller la fonction traitement pour avoir un "rafraichissement" des données
 		traitement();
-		
 	}
 	
 	// Modificiation en base de donnée
@@ -165,7 +178,12 @@ public class TypeService extends MenuService {
 	 * @param id
 	 * */
 	public void suppression(Integer id) {
+		VoitureTypeDao voitureTypeDao = new VoitureTypeDao();
 		boolean result = console.confirm("Suppression de l'item " + id, "Confirmez-vous la suppression de l'item n°"+id);
+		if(result) {
+			voitureTypeDao.delete(id);
+		}
+		
 		traitement();
 	}
 
