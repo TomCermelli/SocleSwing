@@ -104,8 +104,8 @@ public static EntityManagerFactory emf = Persistence.createEntityManagerFactory(
 
 		for (Camion camion : camionList) {
 			html += "<tr>"
-					  + "  <td><a class='btn-blue' href='modificationVoiture(" + camion.getId() + ")'><img width=25 src='images/pencil-blue-xs.png'></a></td>"
-					  + "  <td><a class='btn-red' href='suppressionVoiture(" + camion.getId() + ")'><img width=25 src='images/trash-red-xs.png'></a></td>"
+					  + "  <td><a class='btn-blue' href='modificationCamion(" + camion.getId() + ")'><img width=25 src='images/pencil-blue-xs.png'></a></td>"
+					  + "  <td><a class='btn-red' href='suppressionCamion(" + camion.getId() + ")'><img width=25 src='images/trash-red-xs.png'></a></td>"
 					  + "  <td width='150px'>" + camion.getMarque() + "</td>"
 					  + "  <td width='150px'>" + camion.getModele() + "</td>"
 					  + "  <td width='150px'>" + camion.getStatut() + "</td>"
@@ -290,14 +290,14 @@ public static EntityManagerFactory emf = Persistence.createEntityManagerFactory(
 				}
 				
 				// Champ de type liste de sélection
-				form.addInput(new ComboBox("Type de voiture:", "voiture", camionTypeSelectable));
+				form.addInput(new ComboBox("Type de camion:", "camion", camionTypeSelectable));
 				
 				// Les règles métier sont vérifiées dans le validator
-				boolean valide = console.input("Modification de la voiture : "+camionId.getModele()+ " de la marque " +camionId.getMarque() , form, validator);
+				boolean valide = console.input("Modification du camion: "+camionId.getModele()+ " de la marque " +camionId.getMarque() , form, validator);
 				if (valide) {
 					camionDao.update(camionId, form);
 				}
-				traitement();
+				traitement();	
 			}
 			
 			// Supression de l'objet courant 

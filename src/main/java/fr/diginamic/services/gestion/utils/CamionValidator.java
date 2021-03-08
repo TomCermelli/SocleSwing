@@ -7,6 +7,7 @@ import javax.persistence.TypedQuery;
 
 import fr.diginamic.composants.ui.Form;
 import fr.diginamic.composants.validator.FormValidator;
+import fr.diginamic.services.gestion.entite.Camion;
 import fr.diginamic.services.gestion.entite.Voiture;
 
 public class CamionValidator extends FormValidator {
@@ -24,13 +25,13 @@ public class CamionValidator extends FormValidator {
 		Double nvKilometrage = Double.parseDouble(form.getValue("kilometrage"));
 		Double nvVolume = Double.parseDouble(form.getValue("volume"));
 
-		TypedQuery<Voiture> query = em.createQuery("SELECT v FROM Voiture v WHERE v.marque = ?1 AND v.modele = ?2 AND  v.kilometrage = ?3 AND v.nombrePlace = ?4",
-				Voiture.class);
+		TypedQuery<Camion> query = em.createQuery("SELECT c FROM Camion c WHERE c.marque = ?1 AND c.modele = ?2 AND  c.kilometrage = ?3 AND c.volume = ?4",
+				Camion.class);
 		query.setParameter(1, nvMarque);
 		query.setParameter(2, nvModele);
 		query.setParameter(3, nvKilometrage);
 		query.setParameter(4, nvVolume);
-		List<Voiture> voitureList = query.getResultList();
+		List<Camion> voitureList = query.getResultList();
 
 		if (!voitureList.isEmpty()) {
 			console.alert("Ce camion existe déja");

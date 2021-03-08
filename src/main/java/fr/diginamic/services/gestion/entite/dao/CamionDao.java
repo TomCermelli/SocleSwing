@@ -67,7 +67,7 @@ public class CamionDao extends AbstractDao {
 		String nvImmatriculation = form.getValue("immatriculation");
 		Double nvKilometrage = Double.parseDouble(form.getValue("kilometrage"));
 		Double nvVolume = Double.parseDouble(form.getValue("volume"));
-		CamionType nvCamionType = form.getValue("camion type");
+		CamionType nvCamionType = form.getValue("camion");
 
 		Camion camionBase = em.find(Camion.class, camion.getId());
 
