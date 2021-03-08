@@ -58,7 +58,7 @@ public class CamionTypeDao extends AbstractDao {
 		EntityTransaction transaction = em.getTransaction();
 
 		transaction.begin();
-		String nvType = form.getValue("type de camion");
+		String nvType = form.getValue("type_camion");
 		Double nvTarif = Double.parseDouble(form.getValue("tarif"));
 
 		CamionType camionBase = em.find(CamionType.class, camionType.getId());

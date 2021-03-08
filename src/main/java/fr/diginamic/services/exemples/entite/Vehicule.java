@@ -6,7 +6,7 @@ import fr.diginamic.composants.ui.Selectable;
 
 public class Vehicule implements Selectable {
 
-	private Long id;
+	private Integer id;
 	private String immatriculation;
 	private String marque;
 	private String modele;
@@ -18,7 +18,7 @@ public class Vehicule implements Selectable {
 		this.modele = modele;
 	}
 
-	public Vehicule(Long id, String immatriculation, String marque, String modele) {
+	public Vehicule(Integer id, String immatriculation, String marque, String modele) {
 		super();
 		this.id = id;
 		this.immatriculation = immatriculation;
@@ -43,13 +43,13 @@ public class Vehicule implements Selectable {
 	/**
 	 * @return the id
 	 */
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	/**

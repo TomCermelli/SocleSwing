@@ -17,14 +17,13 @@ public class Voiture extends Vehicule{
 	@JoinColumn(name="id_voiture_type")
 	private VoitureType voitureType;
 	
-	
 
 	public Voiture() {
 		super();
 	}
 	
-	public Voiture(String marque, String modèle, String immatriculation, double kilometrage, int nombrePlace, VoitureType voitureType) {
-		super(marque, modèle, immatriculation, kilometrage);
+	public Voiture(String marque, String modele, String immatriculation, double kilometrage, int nombrePlace, VoitureType voitureType) {
+		super(marque, modele, immatriculation, kilometrage);
 		// TODO Auto-generated constructor stub
 		this.nombrePlace = nombrePlace;
 		this.voitureType = voitureType;

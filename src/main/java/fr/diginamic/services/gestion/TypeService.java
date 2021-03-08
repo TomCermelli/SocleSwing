@@ -61,6 +61,7 @@ public class TypeService extends MenuService {
 					+ 		"</section>"
 					+ 	 "</section>"
 					+"</section>"
+					+"<h2>List type de voiture:</h2>"
 					+"<table class='table' cellspacing=0> "
 					+	"<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Type</td><td>Tarif</td></tr>";
 		
@@ -75,7 +76,8 @@ public class TypeService extends MenuService {
 		
 			html += "</table>"
 				 + "<section>"
-				 + "<table>"
+				 + "<h2>List type de camion</h2>"
+				 + "<table class='table' ceespacing=0>"
 				 + "<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Type</td><td>Tarif</td></tr>";
 			
 		for(CamionType camion : camionTypeList) {
@@ -87,7 +89,8 @@ public class TypeService extends MenuService {
 					  +"</tr>";
 		}
 		
-		html += "</table>";
+		html += "</table>"
+			 +"</section>";
 		
 		console.print(html);
 	}

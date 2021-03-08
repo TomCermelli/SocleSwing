@@ -25,8 +25,8 @@ public abstract class Vehicule {
 	@Column(name = "marque", nullable = false)
 	private String marque;
 
-	@Column(name = "modèle", nullable = false)
-	private String modèle;
+	@Column(name = "modele", nullable = false)
+	private String modele;
 
 	@Column(name = "immatriculation", nullable = false)
 	private String immatriculation;
@@ -47,10 +47,10 @@ public abstract class Vehicule {
 		super();
 	}
 
-	public Vehicule(String marque, String modèle, String immatriculation, double kilometrage) {
+	public Vehicule(String marque, String modele, String immatriculation, double kilometrage) {
 		super();
 		this.marque = marque;
-		this.modèle = modèle;
+		this.modele = modele;
 		this.immatriculation = immatriculation;
 		this.kilometrage = kilometrage;
 	}
@@ -71,12 +71,12 @@ public abstract class Vehicule {
 		this.marque = marque;
 	}
 
-	public String getModèle() {
-		return modèle;
+	public String getModele() {
+		return modele;
 	}
 
-	public void setModèle(String modèle) {
-		this.modèle = modèle;
+	public void setModele(String modele) {
+		this.modele = modele;
 	}
 
 	public String getImmatriculation() {

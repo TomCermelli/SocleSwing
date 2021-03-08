@@ -8,9 +8,10 @@ import javax.persistence.TypedQuery;
 import fr.diginamic.composants.ui.Form;
 import fr.diginamic.composants.validator.FormValidator;
 import fr.diginamic.services.gestion.entite.CamionType;
+import fr.diginamic.services.gestion.entite.Voiture;
 
 public class VoitureValidator extends FormValidator {
-	
+
 	private EntityManager em;
 
 	@Override
@@ -20,16 +21,20 @@ public class VoitureValidator extends FormValidator {
 		String type_camion = form.getValue("type_camion");
 		String montant = form.getValue("montant");
 
-		TypedQuery<CamionType> query2 = em.createQuery("SELECT c FROM CamionType c WHERE c.montant = ?1",
-				CamionType.class);
-		query2.setParameter(1, type_camion);
-		List<CamionType> camionTypeList = query2.getResultList();
+		TypedQuery<Voiture> query = em.createQuery("SELECT v FROM Voiture v WHERE v.marque = ?1 AND v.modele",
+				Voiture.class);
+		query.setParameter(1, type_camion);
+		query.setParameter(1, type_camion);
+		List<Voiture> voitureList = query.getResultList();
 
-		if (type_camion.trim().isEmpty()) {
-			console.alert("Le nom du type est obligatoire !");
-			return false;
-		} else if (!camionTypeList.isEmpty()) {
+		if (!voitureList.isEmpty()) {
 			console.alert("Ce type existe déja");
+			return false;
+
+		}
+		
+		else if (type_camion.trim().isEmpty()) {
+			console.alert("Le nom du type est obligatoire !");
 			return false;
 
 		} else if (montant.trim().isEmpty()) {

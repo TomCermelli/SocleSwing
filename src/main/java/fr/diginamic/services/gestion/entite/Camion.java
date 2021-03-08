@@ -24,9 +24,10 @@ public class Camion extends Vehicule {
 	public Camion() {
 		super();
 	}
-
-	public Camion(double volume, CamionType camionType) {
-		super();
+	
+	public Camion(String marque, String modele, String immatriculation, double kilometrage, double volume, CamionType camionType) {
+		super(marque, modele, immatriculation, kilometrage);
+		// TODO Auto-generated constructor stub
 		this.volume = volume;
 		this.camionType = camionType;
 	}

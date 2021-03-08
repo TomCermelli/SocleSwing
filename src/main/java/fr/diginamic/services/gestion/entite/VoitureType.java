@@ -10,9 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import fr.diginamic.composants.ui.Selectable;
+
 @Entity
 @Table(name = "voiture_type")
-public class VoitureType {
+public class VoitureType implements Selectable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +40,7 @@ public class VoitureType {
 		this.tarif = tarif;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -73,5 +75,12 @@ public class VoitureType {
 	public void setVoiture(List<Voiture> voiture) {
 		this.voiture = voiture;
 	}
+
+	@Override
+	public String toString() {
+		return  type;
+	}
+	
+	
 
 }
