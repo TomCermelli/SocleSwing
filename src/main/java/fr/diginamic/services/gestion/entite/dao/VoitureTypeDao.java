@@ -66,7 +66,13 @@ public class VoitureTypeDao extends AbstractDao {
 		transaction.commit();
 		System.out.println("Votre objet a bien été modifié");
 	}
-
+	
+	
+	/*
+	 * En utilisant l'id on retrouve l'objet voulut pour la supprimer ensuite
+	 * 
+	 * @param id  dqui re présente l'objet courantt
+	 * */
 	public void delete(Integer id) {
 		EntityTransaction transaction = em.getTransaction();
 

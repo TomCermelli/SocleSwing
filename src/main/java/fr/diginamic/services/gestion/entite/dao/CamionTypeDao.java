@@ -15,8 +15,14 @@ public class CamionTypeDao extends AbstractDao {
 	
 	private EntityManager em = emf.createEntityManager();
 
-	private EntityTransaction transaction = em.getTransaction();
 
+	
+	/*
+	 * Cette méthode sélectionne tout les éléments en base de CamionType, la
+	 * méthode renvoie ensuite le résultat de cette query sous forme de liste
+	 * 
+	 * 
+	 */
 	public List<CamionType> selectAll() {
 
 		TypedQuery<CamionType> query = em.createQuery("SELECT c FROM CamionType c", CamionType.class);
@@ -24,8 +30,16 @@ public class CamionTypeDao extends AbstractDao {
 
 		return camionTypeList;
 	}
-
+	
+	/*
+	 * On donne en paramètre un objet courant de type CamionType pour l'inséré en
+	 * base l'élément donnée est vérifié dans une class validator dans le service
+	 * correspondant
+	 * 
+	 * @param un objet de type VoitureType
+	 */
 	public void insert(CamionType camionType) {
+		EntityTransaction transaction = em.getTransaction();
 
 		transaction.begin();
 		em.persist(camionType);
@@ -33,22 +47,31 @@ public class CamionTypeDao extends AbstractDao {
 		System.out.println("Votre insertion s'est bien réalisé");
 	}
 
+	/*
+	 * L'objet CamionType est l'objet courant, il permettra de savoir quelle instance de VoitureType on manipule
+	 * 
+	 * 
+	 * @param objet VoitureType et un formulaire
+	 * */
 	public void update(CamionType camionType, Form form) {
 	
-		transaction.begin();
+		EntityTransaction transaction = em.getTransaction();
 
+		transaction.begin();
 		String nvType = form.getValue("type de camion");
 		Double nvTarif = Double.parseDouble(form.getValue("tarif"));
 
-		camionType.setType(nvType);
-		camionType.setMontant(nvTarif);
+		CamionType camionBase = em.find(CamionType.class, camionType.getId());
+
+		camionBase.setType(nvType);
+		camionBase.setMontant(nvTarif);
 
 		transaction.commit();
-
 		System.out.println("Votre objet a bien été modifié");
 	}
 
 	public void delete(int id) {
+		EntityTransaction transaction = em.getTransaction();
 
 		CamionType camionType = em.find(CamionType.class, id);
 

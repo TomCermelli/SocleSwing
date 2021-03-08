@@ -12,6 +12,7 @@ import fr.diginamic.services.exemples.Exemple4Service;
 import fr.diginamic.services.exemples.Exemple5Service;
 import fr.diginamic.services.exemples.Exemple6Service;
 import fr.diginamic.services.gestion.TypeService;
+import fr.diginamic.services.gestion.VehiculeService;
 
 /**
  * Fenêtre principale qui porte les principaux composants graphiques de
@@ -52,7 +53,7 @@ public class Application extends AbstractApplication {
 		
 		addMenuOption(2, "Liste des clients", new AideService());
 		
-		addMenuOption(3, "Liste des vehicules", new AideService());
+		addMenuOption(3, "Liste des vehicules", new VehiculeService());
 		
 		addMenuOption(4, "Liste des locations", new AideService());
 		

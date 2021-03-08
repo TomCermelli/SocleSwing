@@ -22,9 +22,10 @@ public class Voiture extends Vehicule{
 	public Voiture() {
 		super();
 	}
-
-	public Voiture(int nombrePlace, VoitureType voitureType) {
-		super();
+	
+	public Voiture(String marque, String modèle, String immatriculation, double kilometrage, int nombrePlace, VoitureType voitureType) {
+		super(marque, modèle, immatriculation, kilometrage);
+		// TODO Auto-generated constructor stub
 		this.nombrePlace = nombrePlace;
 		this.voitureType = voitureType;
 	}

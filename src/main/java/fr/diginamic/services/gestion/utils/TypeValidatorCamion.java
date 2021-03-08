@@ -9,10 +9,9 @@ import javax.persistence.TypedQuery;
 
 import fr.diginamic.composants.ui.Form;
 import fr.diginamic.composants.validator.FormValidator;
-import fr.diginamic.services.gestion.entite.VoitureType;
-import fr.diginamic.services.gestion.entite.dao.VoitureTypeDao;
+import fr.diginamic.services.gestion.entite.CamionType;
 
-public class TypeValidator extends FormValidator {
+public class TypeValidatorCamion extends FormValidator {
 
 	private EntityManager em;
 
@@ -20,22 +19,22 @@ public class TypeValidator extends FormValidator {
 	public boolean validate(Form form) {
 		em = FormValidator.emf.createEntityManager();
 
-		String type_voiture = form.getValue("type de voiture");
-		String tarif = form.getValue("tarif");
+		String type_camion = form.getValue("type_camion");
+		String montant = form.getValue("montant");
 
-		TypedQuery<VoitureType> query = em.createQuery("SELECT v FROM VoitureType v WHERE v.type = ?1",
-				VoitureType.class);
-		query.setParameter(1, type_voiture);
-		List<VoitureType> voitureTypeList = query.getResultList();
+		TypedQuery<CamionType> query2 = em.createQuery("SELECT c FROM CamionType c WHERE c.montant = ?1",
+				CamionType.class);
+		query2.setParameter(1, type_camion);
+		List<CamionType> camionTypeList = query2.getResultList();
 
-		if (type_voiture.trim().isEmpty()) {
+		if (type_camion.trim().isEmpty()) {
 			console.alert("Le nom du type est obligatoire !");
 			return false;
-		} else if (!voitureTypeList.isEmpty()) {
+		} else if (!camionTypeList.isEmpty()) {
 			console.alert("Ce type existe déja");
 			return false;
 
-		} else if (tarif.trim().isEmpty()) {
+		} else if (montant.trim().isEmpty()) {
 			console.alert("Le tarif associé au type est obligatoire !");
 			return false;
 		}

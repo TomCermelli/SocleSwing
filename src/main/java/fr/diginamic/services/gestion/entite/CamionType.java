@@ -19,7 +19,7 @@ public class CamionType {
 	@Column(name = "id", nullable = false)
 	private int id;
 
-	@Column(name = "type", nullable = false)
+	@Column(name = "type", nullable = false, unique = true)
 	private String type;
 	
 	@Column(name="montant", nullable = false)
@@ -32,7 +32,7 @@ public class CamionType {
 		super();
 	}
 
-	public CamionType(String type, Double montant) {
+	public CamionType(String type, double montant) {
 		super();
 		this.type = type;
 		this.montant = montant;

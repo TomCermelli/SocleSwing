@@ -47,12 +47,11 @@ public abstract class Vehicule {
 		super();
 	}
 
-	public Vehicule(String marque, String modèle, String immatriculation, String statut, double kilometrage) {
+	public Vehicule(String marque, String modèle, String immatriculation, double kilometrage) {
 		super();
 		this.marque = marque;
 		this.modèle = modèle;
 		this.immatriculation = immatriculation;
-		this.statut = statut;
 		this.kilometrage = kilometrage;
 	}
 
