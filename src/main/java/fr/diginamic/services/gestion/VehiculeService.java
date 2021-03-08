@@ -25,6 +25,7 @@ import fr.diginamic.services.gestion.entite.dao.CamionDao;
 import fr.diginamic.services.gestion.entite.dao.CamionTypeDao;
 import fr.diginamic.services.gestion.entite.dao.VoitureDao;
 import fr.diginamic.services.gestion.entite.dao.VoitureTypeDao;
+import fr.diginamic.services.gestion.utils.CamionValidator;
 import fr.diginamic.services.gestion.utils.TypeValidator;
 import fr.diginamic.services.gestion.utils.VoitureValidator;
 
@@ -47,7 +48,8 @@ public static EntityManagerFactory emf = Persistence.createEntityManagerFactory(
 		console.clear();
 		console.println("<h1 class='bg-dark'><center>Création de Vehicule<br></center></h1>");
 
-		String html ="<section class='d-flex'>"
+		String html =
+				"<section class='d-flex'>"
 				+	 "<section>"
 				+ 		"<section class='d-flex fd-vertical'>"
 				+			"<p>Création d'une voiture</p>"
@@ -61,6 +63,8 @@ public static EntityManagerFactory emf = Persistence.createEntityManagerFactory(
 				+ 		"</section>"
 				+ 	 "</section>"
 				+"</section>"
+				+"<section class='d-flex'>"
+				+ "<h2>List de Voiture</h2>"
 				+"<table class='table' cellspacing=0> "
 				+ "<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Marque</td>"
 				+ "<td>Modele</td>"
@@ -79,7 +83,7 @@ public static EntityManagerFactory emf = Persistence.createEntityManagerFactory(
 					  + "  <td width='150px'>" + voiture.getModele() + "</td>"
 					  + "  <td width='150px'>" + voiture.getStatut() + "</td>"
 					  + "  <td width='150px'>" + voiture.getImmatriculation() + "</td>"
-					  + "  <td width='150px'>" + voiture.getKilometrage() + "km</td>"
+					  + "  <td width='150px'>" + voiture.getKilometrage() + " km</td>"
 					  + "  <td width='150px'>" + voiture.getNombrePlace() + "</td>"
 					  + "  <td width='150px'>" + voiture.getVoitureType() + "</td>" 
 					  +"</tr>";
@@ -87,6 +91,7 @@ public static EntityManagerFactory emf = Persistence.createEntityManagerFactory(
 
 		html += "</table>" 
 				+ "<section>" 
+				+ "<h2>List de camion</h2>"
 				+"<table class='table' cellspacing=0> "
 				+	"<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Marque</td>"
 				+ "<td>Modele</td>"
@@ -105,16 +110,19 @@ public static EntityManagerFactory emf = Persistence.createEntityManagerFactory(
 					  + "  <td width='150px'>" + camion.getModele() + "</td>"
 					  + "  <td width='150px'>" + camion.getStatut() + "</td>"
 					  + "  <td width='150px'>" + camion.getImmatriculation() + "</td>"
-					  + "  <td width='150px'>" + camion.getKilometrage() + "km</td>"
+					  + "  <td width='150px'>" + camion.getKilometrage() + " km</td>"
 					  + "  <td width='150px'>" + camion.getVolume() + "</td>"
 					  + "  <td width='150px'>" + camion.getCamionType() + "</td>" 
 					  +"</tr>";
 		}
 
-	   html += "</table>";
+	   html += "</table>"
+			   +"</section>";
 
 		console.println(html);
 	}
+	
+	// CRUD de voiture
 
 	public void creationVoiture() {
 		VoitureValidator validator = new VoitureValidator();
@@ -166,17 +174,26 @@ public static EntityManagerFactory emf = Persistence.createEntityManagerFactory(
 		public void modificationVoiture(Integer id) {
 			VoitureValidator validator = new VoitureValidator();
 			VoitureDao voitureDao = new VoitureDao();
-			Voiture voitureId = voitureDao.findById(id);	
+			VoitureTypeDao voitureTypeDao = new VoitureTypeDao();
 			
+			List<VoitureType> voitureTypeList = voitureTypeDao.selectAll();
+			
+			Voiture voitureId = voitureDao.findById(id);
 			// On commence par créér le formulaire vide
-			Form form = new Form();
-					
+			Form form = new Form();	
 			// On ajoute au formulaire 2 champs de type texte pour permettre de modifier le nom et le prénom du client
-			form.addInput(new TextField("Marque:", "marque"));
-			form.addInput(new TextField("Modèle:", "modele"));
-			form.addInput(new TextField("Immatriculation:", "immatriculation"));
-			form.addInput(new TextField("Kilométrage:", "kilometrage"));
-			form.addInput(new TextField("Nombre de place:", "nombre de place"));
+			form.addInput(new TextField("Marque:", "marque", voitureId.getMarque()));
+			form.addInput(new TextField("Modèle:", "modele", voitureId.getModele()));
+			form.addInput(new TextField("Immatriculation:", "immatriculation", voitureId.getImmatriculation()));
+			form.addInput(new TextField("Kilométrage:", "kilometrage", String.valueOf(voitureId.getKilometrage())));
+			form.addInput(new TextField("Nombre de place:", "nombre de place", String.valueOf(voitureId.getNombrePlace())));
+			List<Selectable> voitureTypeSelectable = new ArrayList<>();
+			for(VoitureType voiture : voitureTypeList) {
+				voitureTypeSelectable.add(voiture);
+			}
+			
+			// Champ de type liste de sélection
+			form.addInput(new ComboBox("Type de voiture:", "voiture", voitureTypeSelectable));
 			
 			// Les règles métier sont vérifiées dans le validator
 			boolean valide = console.input("Modification de la voiture : "+voitureId.getModele()+ " de la marque " +voitureId.getMarque() , form, validator);
@@ -201,5 +218,102 @@ public static EntityManagerFactory emf = Persistence.createEntityManagerFactory(
 			}
 			traitement();
 		}
+		
+		// CRUD de camion
+
+		public void creationCamion() {
+			CamionValidator validator = new CamionValidator();
+			CamionDao camioneDao = new CamionDao();
+			
+			CamionTypeDao camionTypeDao = new CamionTypeDao();
+			List<CamionType> camionTypeList = camionTypeDao.selectAll();
+			
+			Form form = new Form();
+			// On ajoute au formulaire 2 champs de type texte.
+			form.addInput(new TextField("Marque:", "marque"));
+			form.addInput(new TextField("Modèle:", "modele"));
+			form.addInput(new TextField("Immatriculation:", "immatriculation"));
+			form.addInput(new TextField("Kilométrage:", "kilometrage"));
+			form.addInput(new TextField("Volume:", "volume"));
+			
+			List<Selectable> camionTypeSelectable = new ArrayList<>();
+			for(CamionType camion : camionTypeList) {
+				camionTypeSelectable.add(camion);
+			}
+			
+			// Champ de type liste de sélection
+			form.addInput(new ComboBox("Type de camion:", "camion", camionTypeSelectable));
+			boolean valide = console.input("Création d'un Camion", form, validator);
+			
+			if(valide) {
+				String nvMarque = form.getValue("marque");
+				String nvModele = form.getValue("modele");
+				String nvImmatriculation = form.getValue("immatriculation");
+				Double nvKilometrage = Double.parseDouble(form.getValue("kilometrage"));
+				Double nvVolume = Double.parseDouble(form.getValue("volume"));
+				CamionType nvCamionType = form.getValue("camion");
+				
+				Camion voiture = new Camion(nvMarque, nvModele, nvImmatriculation, nvKilometrage, nvVolume, nvCamionType);
+				camioneDao.insert(voiture);
+				
+			}
+			// Une fois la création terminé il faut rappeller la fonction traitement pour avoir un "rafraichissement" des données
+			traitement();
+		}
+		
+		// Modificiation en base de donnée
+
+			/*
+			 * On demande l'id de l'objet courant pour le transmettre dans le dao pour le modifié
+			 * 
+			 * @param id
+			 * */
+			public void modificationCamion(Integer id) {
+				CamionValidator validator = new CamionValidator();
+				CamionDao camionDao = new CamionDao();
+				CamionTypeDao camionTypeDao = new CamionTypeDao();
+				
+				List<CamionType> camionTypeList = camionTypeDao.selectAll();
+				
+				Camion camionId = camionDao.findById(id);
+				// On commence par créér le formulaire vide
+				Form form = new Form();	
+				// On ajoute au formulaire 2 champs de type texte pour permettre de modifier le nom et le prénom du client
+				form.addInput(new TextField("Marque:", "marque", camionId.getMarque()));
+				form.addInput(new TextField("Modèle:", "modele", camionId.getModele()));
+				form.addInput(new TextField("Immatriculation:", "immatriculation", camionId.getImmatriculation()));
+				form.addInput(new TextField("Kilométrage:", "kilometrage", String.valueOf(camionId.getKilometrage())));
+				form.addInput(new TextField("Volume", "volume", String.valueOf(camionId.getVolume())));
+				List<Selectable> camionTypeSelectable = new ArrayList<>();
+				for(CamionType camion : camionTypeList) {
+					camionTypeSelectable.add(camion);
+				}
+				
+				// Champ de type liste de sélection
+				form.addInput(new ComboBox("Type de voiture:", "voiture", camionTypeSelectable));
+				
+				// Les règles métier sont vérifiées dans le validator
+				boolean valide = console.input("Modification de la voiture : "+camionId.getModele()+ " de la marque " +camionId.getMarque() , form, validator);
+				if (valide) {
+					camionDao.update(camionId, form);
+				}
+				traitement();
+			}
+			
+			// Supression de l'objet courant 
+			
+			/*
+			 * On demande l'id de l'objet courant afin de le supprimer
+			 * 
+			 * @param id
+			 * */
+			public void suppressionCamion(Integer id) {
+				CamionDao camionDao = new CamionDao();
+				boolean result = console.confirm("Suppression de l'item " + id, "Confirmez-vous la suppression de l'item n°"+id);
+				if(result) {
+					camionDao.delete(id);
+				}
+				traitement();
+			}
 
 }

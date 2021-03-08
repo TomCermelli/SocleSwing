@@ -45,7 +45,7 @@ public class TypeService extends MenuService {
 		
 
 		console.clear();
-		console.print("<h1 class='bg-dark'><center>Création de type <br> Voiture / Camion / Permis</center></h1>");
+		console.println("<h1 class='bg-dark'><center>Création de type <br> Voiture / Camion / Permis</center></h1>");
 
 		String html ="<section class='d-flex'>"
 					+	 "<section>"
@@ -61,6 +61,9 @@ public class TypeService extends MenuService {
 					+ 		"</section>"
 					+ 	 "</section>"
 					+"</section>"
+					+"</br>"
+					+"<section class='d-flex'>"
+					+"<section class='d-flex'>"
 					+"<h2>List type de voiture:</h2>"
 					+"<table class='table' cellspacing=0> "
 					+	"<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Type</td><td>Tarif</td></tr>";
@@ -75,6 +78,7 @@ public class TypeService extends MenuService {
 		}
 		
 			html += "</table>"
+				 +"</section>"
 				 + "<section>"
 				 + "<h2>List type de camion</h2>"
 				 + "<table class='table' ceespacing=0>"
@@ -89,10 +93,11 @@ public class TypeService extends MenuService {
 					  +"</tr>";
 		}
 		
-		html += "</table>"
-			 +"</section>";
+			html += "</table>"
+				 +"</section>"
+				 +"</section>";
 		
-		console.print(html);
+		console.println(html);
 	}
 	
 	//----------------------------  CRUD des type de voiture ---------------------------- 

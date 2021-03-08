@@ -34,7 +34,7 @@ public class VoitureDao extends AbstractDao {
 	}
 
 	/*
-	 * On donne en paramètre un objet courant de type VoitureType pour l'inséré en
+	 * On donne en paramètre un objet courant de type Voiture pour l'inséré en
 	 * base l'élément donnée est vérifié dans une class validator dans le service
 	 * correspondant
 	 * 
@@ -58,7 +58,6 @@ public class VoitureDao extends AbstractDao {
 	 */
 	public void update(Voiture voiture, Form form) {
 		EntityTransaction transaction = em.getTransaction();
-		VoitureTypeDao voitureTypeDao = new VoitureTypeDao();
 
 		transaction.begin();
 		String nvMarque = form.getValue("marque");
@@ -66,7 +65,7 @@ public class VoitureDao extends AbstractDao {
 		String nvImmatriculation = form.getValue("immatriculation");
 		Double nvKilometrage = Double.parseDouble(form.getValue("kilometrage"));
 		int nvNombrePlace = Integer.parseInt(form.getValue("nombre de place"));
-		VoitureType nvVoitureType = voitureTypeDao.findById(Integer.parseInt(form.getValue("voiture type")));
+		VoitureType nvVoitureType = form.getValue("voiture");
 
 		Voiture voitureBase = em.find(Voiture.class, voiture.getId());
 

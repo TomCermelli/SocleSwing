@@ -15,7 +15,7 @@ public class VoitureValidator extends FormValidator {
 	@Override
 	public boolean validate(Form form) {
 		em = FormValidator.emf.createEntityManager();
-		String pattern = "[A-Z]{2}[-][0-9A-Z]{4}[-][A-Z]{2}";
+		String pattern = "[A-Z]{2}[-][0-9A-Z]{3}[-][A-Z]{2}";
 		
 		String nvMarque = form.getValue("marque");
 		String nvModele = form.getValue("modele");
@@ -23,10 +23,12 @@ public class VoitureValidator extends FormValidator {
 		Double nvKilometrage = Double.parseDouble(form.getValue("kilometrage"));
 		int nvNombrePlace = Integer.parseInt(form.getValue("nombre de place"));
 
-		TypedQuery<Voiture> query = em.createQuery("SELECT v FROM Voiture v WHERE v.marque = ?1 AND v.modele = ?2",
+		TypedQuery<Voiture> query = em.createQuery("SELECT v FROM Voiture v WHERE v.marque = ?1 AND v.modele = ?2 AND  v.kilometrage = ?3 AND v.nombrePlace = ?4",
 				Voiture.class);
 		query.setParameter(1, nvMarque);
 		query.setParameter(2, nvModele);
+		query.setParameter(3, nvKilometrage);
+		query.setParameter(4, nvNombrePlace);
 		List<Voiture> voitureList = query.getResultList();
 
 		if (!voitureList.isEmpty()) {
@@ -43,7 +45,7 @@ public class VoitureValidator extends FormValidator {
 			return false;
 		}
 		else if (!nvImmatriculation.matches(pattern)) {
-			console.alert("le numéro d'imatriculation n'est pas dans le bon format , veuillez entrer sous forme XX-X0X0-XX");
+			console.alert("le numéro d'imatriculation n'est pas dans le bon format , veuillez entrer sous forme XX-X00-XX");
 			return false;
 		}
 		else if (nvKilometrage<0) {
