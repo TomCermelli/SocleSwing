@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 
 import fr.diginamic.composants.ui.Form;
 import fr.diginamic.services.gestion.entite.CamionType;
+import fr.diginamic.services.gestion.entite.Voiture;
 import fr.diginamic.services.gestion.entite.VoitureType;
 
 public class CamionTypeDao extends AbstractDao {
@@ -29,6 +30,11 @@ public class CamionTypeDao extends AbstractDao {
 		List<CamionType> camionTypeList = query.getResultList();
 
 		return camionTypeList;
+	}
+	
+	public CamionType findById(Integer id) {
+
+		return this.em.find(CamionType.class, id);
 	}
 	
 	/*
@@ -65,7 +71,8 @@ public class CamionTypeDao extends AbstractDao {
 
 		camionBase.setType(nvType);
 		camionBase.setMontant(nvTarif);
-
+		
+		em.persist(camionBase);
 		transaction.commit();
 		System.out.println("Votre objet a bien été modifié");
 	}

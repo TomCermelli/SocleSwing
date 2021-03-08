@@ -12,15 +12,17 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import fr.diginamic.composants.ui.Selectable;
+
 @Entity
 @Table(name="vehicule")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Vehicule {
+public abstract class Vehicule implements Selectable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
-	private int id;
+	private Integer id;
 
 	@Column(name = "marque", nullable = false)
 	private String marque;
@@ -55,7 +57,7 @@ public abstract class Vehicule {
 		this.kilometrage = kilometrage;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

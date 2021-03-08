@@ -116,13 +116,7 @@ public abstract class AbstractApplication extends JFrame {
 					currentMenuService = menuService;
 
 					TraitementMenu tt = new TraitementMenu(menuService);
-					try {
-						threadService.submit(tt).get();
-					} catch (InterruptedException | ExecutionException e1) {
-						System.out.println(e1.getMessage());
-						e1.printStackTrace();
-						ErrorManager.manage(e1.getMessage(), e1);
-					}
+					threadService.submit(tt);
 				}
 
 				@Override
@@ -183,10 +177,6 @@ public abstract class AbstractApplication extends JFrame {
 		style.addRule(".btn-orange { color: #FFFFFF; background: #ffc107;  text-decoration: none; }");
 		style.addRule(".btn-turquoise { color: #FFFFFF; background: #17a2b8;  text-decoration: none; }");
 		style.addRule(".btn-yellow { color: #000000; background: #FFFF00;  text-decoration: none; }");
-		
-		style.addRule(".d-flex {display: flex}");
-		style.addRule(".fd-vertical {flex-direction : column}");
-		style.addRule(".just { justify-content : center}");
 
 		// La mise à NULL du Layout permet d'afficher tous les éléments de l'interface
 		// graphique en coordonnées X, Y

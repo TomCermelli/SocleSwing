@@ -28,6 +28,11 @@ public class VoitureTypeDao extends AbstractDao {
 
 		return voitureTypeList;
 	}
+	
+	public VoitureType findById(Integer id) {
+		
+		return this.em.find(VoitureType.class, id);	
+	}
 
 	/*
 	 * On donne en paramètre un objet courant de type VoitureType pour l'inséré en
@@ -62,7 +67,8 @@ public class VoitureTypeDao extends AbstractDao {
 
 		voitureBase.setType(nvType);
 		voitureBase.setTarif(nvTarif);
-
+		
+		em.persist(voitureBase);
 		transaction.commit();
 		System.out.println("Votre objet a bien été modifié");
 	}

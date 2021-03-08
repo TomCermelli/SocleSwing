@@ -19,7 +19,7 @@ public class VoitureType implements Selectable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
-	private int id;
+	private Integer id;
 
 	@Column(name = "type", nullable = false, unique = true)
 	private String type;
