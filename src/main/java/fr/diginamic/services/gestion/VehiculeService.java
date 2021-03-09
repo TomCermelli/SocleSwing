@@ -48,7 +48,7 @@ public static EntityManagerFactory emf = Persistence.createEntityManagerFactory(
 		console.clear();
 		console.println("<h1 class='bg-dark'><center>Création de Vehicule<br></center></h1>");
 
-		String html =
+		String htmlHeader =
 				"<section class='d-flex'>"
 				+	 "<section>"
 				+ 		"<section class='d-flex fd-vertical'>"
@@ -62,8 +62,9 @@ public static EntityManagerFactory emf = Persistence.createEntityManagerFactory(
 				+ 			"<button><a class='btn-blue' href='creationCamion()'><img width=25 src='images/plus-blue.png'></a></button>"
 				+ 		"</section>"
 				+ 	 "</section>"
-				+"</section>"
-				+"<section class='d-flex'>"
+				+"</section>";
+		String htmlBody =
+				"<section class='d-flex'>"
 				+ "<h2>List de Voiture</h2>"
 				+"<table class='table' cellspacing=0> "
 				+ "<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Marque</td>"
@@ -71,12 +72,12 @@ public static EntityManagerFactory emf = Persistence.createEntityManagerFactory(
 				+ "<td>Statut</td>"
 				+ "<td>Immatriculation</td>"
 				+ "<td>Kilométrage</td>"
-				+ "<td>NombrePlace</td>"
+				+ "<td>Volume</td>"
 				+"<td>Type de voiture</td>"
 				+"</tr>";
 
 		for (Voiture voiture : voitureList) {
-			html += "<tr>"
+			htmlBody += "<tr>"
 					  + "  <td><a class='btn-blue' href='modificationVoiture(" + voiture.getId() + ")'><img width=25 src='images/pencil-blue-xs.png'></a></td>"
 					  + "  <td><a class='btn-red' href='suppressionVoiture(" + voiture.getId() + ")'><img width=25 src='images/trash-red-xs.png'></a></td>"
 					  + "  <td width='150px'>" + voiture.getMarque() + "</td>"
@@ -89,7 +90,7 @@ public static EntityManagerFactory emf = Persistence.createEntityManagerFactory(
 					  +"</tr>";
 		}
 
-		html += "</table>" 
+		htmlBody += "</table>" 
 				+ "<section>" 
 				+ "<h2>List de camion</h2>"
 				+"<table class='table' cellspacing=0> "
@@ -103,7 +104,7 @@ public static EntityManagerFactory emf = Persistence.createEntityManagerFactory(
 				+"</tr>";
 
 		for (Camion camion : camionList) {
-			html += "<tr>"
+			htmlBody += "<tr>"
 					  + "  <td><a class='btn-blue' href='modificationCamion(" + camion.getId() + ")'><img width=25 src='images/pencil-blue-xs.png'></a></td>"
 					  + "  <td><a class='btn-red' href='suppressionCamion(" + camion.getId() + ")'><img width=25 src='images/trash-red-xs.png'></a></td>"
 					  + "  <td width='150px'>" + camion.getMarque() + "</td>"
@@ -111,15 +112,16 @@ public static EntityManagerFactory emf = Persistence.createEntityManagerFactory(
 					  + "  <td width='150px'>" + camion.getStatut() + "</td>"
 					  + "  <td width='150px'>" + camion.getImmatriculation() + "</td>"
 					  + "  <td width='150px'>" + camion.getKilometrage() + " km</td>"
-					  + "  <td width='150px'>" + camion.getVolume() + "</td>"
+					  + "  <td width='150px'>" + camion.getVolume() + " m3</td>"
 					  + "  <td width='150px'>" + camion.getCamionType() + "</td>" 
 					  +"</tr>";
 		}
 
-	   html += "</table>"
+		htmlBody += "</table>"
 			   +"</section>";
 
-		console.println(html);
+		console.println(htmlHeader);
+		console.println(htmlBody);
 	}
 	
 	// CRUD de voiture

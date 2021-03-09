@@ -11,6 +11,7 @@ import javax.persistence.TypedQuery;
 
 import fr.diginamic.composants.MenuService;
 import fr.diginamic.composants.db.SqlUtils;
+import fr.diginamic.composants.ui.DateField;
 import fr.diginamic.composants.ui.Form;
 import fr.diginamic.composants.ui.TextField;
 import fr.diginamic.services.exemples.entite.Personne;
@@ -74,6 +75,7 @@ public class Exemple5Service extends MenuService {
 		// On ajoute au formulaire 2 champs de type texte pour permettre de modifier le nom et le prénom du client
 		form.addInput(new TextField("Nom:", "champ1", c.getNom()));
 		form.addInput(new TextField("Prénom:", "champ2", c.getPrenom()));
+		form.addInput(new DateField("Date de naissance :", "dateNaissance"));
 		
 		// Les règles métier sont vérifiées dans le validator
 		Exemple5FormValidator validator = new Exemple5FormValidator();

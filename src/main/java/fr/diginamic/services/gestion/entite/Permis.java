@@ -1,5 +1,6 @@
 package fr.diginamic.services.gestion.entite;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -27,7 +28,7 @@ public class Permis {
 	private int numero;
 
 	@Column(name = "date_obtention", nullable = false)
-	private Date dateObtention;
+	private LocalDate dateObtention;
 
 	@OneToOne
 	@JoinColumn(name = "id_client")
@@ -37,7 +38,7 @@ public class Permis {
 		super();
 	}
 
-	public Permis(String type, int numero, Date dateObtention, Client client) {
+	public Permis(String type, int numero, LocalDate dateObtention, Client client) {
 		super();
 		this.type = type;
 		this.numero = numero;
@@ -69,11 +70,11 @@ public class Permis {
 		this.numero = numero;
 	}
 
-	public Date getDateObtention() {
+	public LocalDate getDateObtention() {
 		return dateObtention;
 	}
 
-	public void setDateObtention(Date dateObtention) {
+	public void setDateObtention(LocalDate dateObtention) {
 		this.dateObtention = dateObtention;
 	}
 

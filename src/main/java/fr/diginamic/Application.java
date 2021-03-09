@@ -11,6 +11,8 @@ import fr.diginamic.services.exemples.Exemple3Service;
 import fr.diginamic.services.exemples.Exemple4Service;
 import fr.diginamic.services.exemples.Exemple5Service;
 import fr.diginamic.services.exemples.Exemple6Service;
+import fr.diginamic.services.gestion.ClientService;
+import fr.diginamic.services.gestion.PermisService;
 import fr.diginamic.services.gestion.TypeService;
 import fr.diginamic.services.gestion.VehiculeService;
 
@@ -51,13 +53,14 @@ public class Application extends AbstractApplication {
 		
 		addMenuOption(1, "Aide", new AideService());
 		
-		addMenuOption(2, "Liste des clients", new AideService());
+		addMenuOption(2, "Liste des clients", new ClientService());
 		
 		addMenuOption(3, "Liste des vehicules", new VehiculeService());
 		
 		addMenuOption(4, "Liste des locations", new AideService());
 		
 		addMenuOption(5, "Création Type", new TypeService());
+		addMenuOption(5, "Création Permis", new PermisService());
 		
 		addMenuOption(6, "Exemple 1 - Titres", new Exemple1Service());
 		addMenuOption(6, "Exemple 2 - Textes de couleur", new Exemple2Service());

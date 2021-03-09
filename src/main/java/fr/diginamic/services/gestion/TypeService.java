@@ -15,10 +15,8 @@ import fr.diginamic.composants.ui.TextField;
 import fr.diginamic.services.exemples.Exemple5FormValidator;
 import fr.diginamic.services.exemples.entite.Personne;
 import fr.diginamic.services.gestion.entite.CamionType;
-import fr.diginamic.services.gestion.entite.Permis;
 import fr.diginamic.services.gestion.entite.VoitureType;
 import fr.diginamic.services.gestion.entite.dao.CamionTypeDao;
-import fr.diginamic.services.gestion.entite.dao.PermisTypeDao;
 import fr.diginamic.services.gestion.entite.dao.VoitureTypeDao;
 import fr.diginamic.services.gestion.utils.TypeValidator;
 import fr.diginamic.services.gestion.utils.TypeValidatorCamion;
@@ -37,17 +35,15 @@ public class TypeService extends MenuService {
 
 		VoitureTypeDao voitureTypeDao = new VoitureTypeDao();
 		CamionTypeDao camionTypeDao = new CamionTypeDao();
-		PermisTypeDao permisTypeDao = new PermisTypeDao();
 		
 		List<VoitureType> voitureTypeList = voitureTypeDao.selectAll();
 		List<CamionType> camionTypeList = camionTypeDao.selectAll();
-		List<Permis> permisTypeList = permisTypeDao.selectAll();
 		
 
 		console.clear();
-		console.println("<h1 class='bg-dark'><center>Création de type <br> Voiture / Camion / Permis</center></h1>");
+		console.println("<h1 class='bg-dark'><center>Création de type <br> Voiture / Camion</center></h1>");
 
-		String html ="<section class='d-flex'>"
+		String htmlHeader ="<section class='d-flex'>"
 					+	 "<section>"
 					+ 		"<section class='d-flex fd-vertical'>"
 					+			"<p>Création d'un type de Voiture</p>"
@@ -60,16 +56,16 @@ public class TypeService extends MenuService {
 					+ 			"<button><a class='btn-blue' href='creationCamion()'><img width=25 src='images/plus-blue.png'></a></button>"
 					+ 		"</section>"
 					+ 	 "</section>"
-					+"</section>"
-					+"</br>"
-					+"<section class='d-flex'>"
+					+"</section>";
+		String htmlBody =
+					"<section class='d-flex'>"
 					+"<section class='d-flex'>"
 					+"<h2>List type de voiture:</h2>"
 					+"<table class='table' cellspacing=0> "
 					+	"<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Type</td><td>Tarif</td></tr>";
 		
 		for (VoitureType voiture : voitureTypeList) {
-					html += "<tr>"
+			htmlBody += "<tr>"
 						  + "  <td><a class='btn-blue' href='modificationVoiture(" + voiture.getId() + ")'><img width=25 src='images/pencil-blue-xs.png'></a></td>"
 						  + "  <td><a class='btn-red' href='suppressionVoiture(" + voiture.getId() + ")'><img width=25 src='images/trash-red-xs.png'></a></td>"
 						  + "  <td width='150px'>" + voiture.getType() + "</td>"
@@ -77,7 +73,7 @@ public class TypeService extends MenuService {
 						  +"</tr>";
 		}
 		
-			html += "</table>"
+		htmlBody += "</table>"
 				 +"</section>"
 				 + "<section>"
 				 + "<h2>List type de camion</h2>"
@@ -85,7 +81,7 @@ public class TypeService extends MenuService {
 				 + "<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Type</td><td>Tarif</td></tr>";
 			
 		for(CamionType camion : camionTypeList) {
-			html += "<tr>"
+			htmlBody += "<tr>"
 					  + "  <td><a class='btn-blue' href='modificationCamion(" + camion.getId() + ")'><img width=25 src='images/pencil-blue-xs.png'></a></td>"
 					  + "  <td><a class='btn-red' href='suppressionCamion(" + camion.getId() + ")'><img width=25 src='images/trash-red-xs.png'></a></td>"
 					  + "  <td width='150px'>" + camion.getType() + "</td>"
@@ -93,11 +89,12 @@ public class TypeService extends MenuService {
 					  +"</tr>";
 		}
 		
-			html += "</table>"
+		htmlBody += "</table>"
 				 +"</section>"
 				 +"</section>";
 		
-		console.println(html);
+		console.println(htmlHeader);
+		console.println(htmlBody);
 	}
 	
 	//----------------------------  CRUD des type de voiture ---------------------------- 

@@ -30,7 +30,7 @@ public abstract class Vehicule implements Selectable {
 	@Column(name = "modele", nullable = false)
 	private String modele;
 
-	@Column(name = "immatriculation", nullable = false)
+	@Column(name = "immatriculation", nullable = false, unique = true)
 	private String immatriculation;
 
 	@Column(name = "statut", nullable = false)
