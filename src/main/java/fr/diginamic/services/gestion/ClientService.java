@@ -122,7 +122,7 @@ public static EntityManagerFactory emf = Persistence.createEntityManagerFactory(
 		form.addInput(new TextField("Code Postal:", "code postal", String.valueOf(client.getAdresse().getCodePostal())));
 		form.addInput(new TextField("Ville:", "ville", client.getAdresse().getVille()));
 		form.addInput(new TextField("Numéro de téléphone:", "numero tel", client.getAdresse().getNumeroTel()));
-		form.addInput(new TextField("Email:", "email", client.getAdresse().getVille()));
+		form.addInput(new TextField("Email:", "email", client.getAdresse().getEmail()));
 		
 		
 		// Les règles métier sont vérifiées dans le validator

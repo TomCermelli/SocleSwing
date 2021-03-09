@@ -46,7 +46,9 @@ public class PermisService extends MenuService {
 		String htmlTitle ="<h2>List de Permis</h2>"; 
 		String htmlBody = "<table class='table' cellspacing=0> "
 				+ "<tr class='bg-green'><td>&nbsp;</td><td>&nbsp;</td><td>Type</td>" + "<td>Numero</td>"
-				+ "<td>DateObtention</td>" + "</tr>";
+				+ "<td>DateObtention</td>" 
+				+ "<td>Client</td>" 
+				+"</tr>";
 
 		for (Permis permis : permisList) {
 		htmlBody += "<tr>" + "  <td><a class='btn-blue' href='modification(" + permis.getId()
@@ -133,7 +135,6 @@ public class PermisService extends MenuService {
 		form.addInput(new ComboBox("Client:", "client", clientSelectable));
 
 		boolean valide = console.input("Modification d'un Permis", form, validator);
-
 		if (valide) {
 			permisDao.update(permisId, form);
 		}
@@ -148,11 +149,11 @@ public class PermisService extends MenuService {
 	 * @param id
 	 */
 	public void suppression(Integer id) {
-		CamionDao camionDao = new CamionDao();
+		PermisDao permisDao = new PermisDao();
 		boolean result = console.confirm("Suppression de l'item " + id,
 				"Confirmez-vous la suppression de l'item n°" + id);
 		if (result) {
-			camionDao.delete(id);
+			permisDao.delete(id);
 		}
 		traitement();
 	}

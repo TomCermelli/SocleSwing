@@ -14,11 +14,12 @@ public class ClientValidator extends FormValidator {
 
 	@Override
 	public boolean validate(Form form) {
+		em = FormValidator.emf.createEntityManager();
 
 		// REGEX
 		String patternRue = "[0-9]";
 		String patternTel = "[0][1][0-9]{8}";
-		String patternEmail = "[a-zA-Z0-9._%+-][@][a-zA-Z0-9.-][.][a-zA-Z]";
+		String patternEmail = "(?:[a-zA-Z0-9._%+-]+)[@](?:[a-zA-Z0-9.-]+)[.][a-zA-Z]{2,4}";
 
 		// Valeurs du formulaires
 		String nom = form.getValue("nom");
@@ -32,15 +33,17 @@ public class ClientValidator extends FormValidator {
 		String email = form.getValue("email");
 
 		// vérifié si le client existe déja ou non
-		TypedQuery<Client> query = em.createQuery("SELECT c FROM Client c WHERE c.nom = ?1 AND c.prenom = ?2",
+		TypedQuery<Client> query = em.createQuery("SELECT c FROM Client c WHERE c.nom = ?1 AND c.prenom = ?2 AND c.numeroTel = ?3 AND c.email = ?4",
 				Client.class);
 		query.setParameter(1, nom);
 		query.setParameter(2, prenom);
+		query.setParameter(3, numeroTel);
+		query.setParameter(4, email);
 
 		List<Client> camionList = query.getResultList();
 
 		if (!camionList.isEmpty()) {
-			console.alert("Ce camion existe déja");
+			console.alert("Ce client existe déja");
 			return false;
 		}
 
@@ -68,10 +71,10 @@ public class ClientValidator extends FormValidator {
 			console.alert("Votre numéro de téléphone doit commencé par 01 et doit contenir 10 chiffres");
 			return false;
 		}
-//		else if(!email.matches(patternEmail)) {
-//			console.alert("l'email n'est pas dans le bon format");
-//			return false;
-//		}
+		else if(!email.matches(patternEmail)) {
+			console.alert("l'email n'est pas dans le bon format");
+			return false;
+		}
 
 		return true;
 	}

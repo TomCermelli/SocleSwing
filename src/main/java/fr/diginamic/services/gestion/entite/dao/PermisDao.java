@@ -60,7 +60,7 @@ public class PermisDao extends AbstractDao {
 		EntityTransaction transaction = em.getTransaction();
 	
 		transaction.begin();
-		String nvType = form.getValue("permis type");
+		String nvType = form.getValue("type");
 		String nvNumero = form.getValue("numero");
 		String nvDate = form.getValue("dateObtention");
 		Client client = form.getValue("client");
