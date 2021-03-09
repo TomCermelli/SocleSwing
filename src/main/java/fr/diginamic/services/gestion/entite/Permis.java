@@ -25,7 +25,7 @@ public class Permis {
 	private String type;
 
 	@Column(name = "numero_permis", nullable = false)
-	private int numero;
+	private String numero;
 
 	@Column(name = "date_obtention", nullable = false)
 	private LocalDate dateObtention;
@@ -38,7 +38,7 @@ public class Permis {
 		super();
 	}
 
-	public Permis(String type, int numero, LocalDate dateObtention, Client client) {
+	public Permis(String type, String numero, LocalDate dateObtention, Client client) {
 		super();
 		this.type = type;
 		this.numero = numero;
@@ -62,11 +62,11 @@ public class Permis {
 		this.type = type;
 	}
 
-	public int getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 

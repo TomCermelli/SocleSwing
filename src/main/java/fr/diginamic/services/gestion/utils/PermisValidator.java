@@ -16,10 +16,9 @@ public class PermisValidator extends FormValidator {
 			console.alert("Le type de permis est obligatoire !");
 			return false;
 		}
-		else if(numero.length()<16) {
+		else if(numero.length()<15) {
 			console.alert("Le numéro de permis doit contenir 15 chiffres");
 			return false;
-			
 		}
 		
 		return true;

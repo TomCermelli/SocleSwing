@@ -1,12 +1,15 @@
 package fr.diginamic.services.gestion.entite.dao;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import fr.diginamic.composants.ui.Form;
+import fr.diginamic.services.gestion.entite.Client;
 import fr.diginamic.services.gestion.entite.Permis;
 
 public class PermisDao extends AbstractDao {
@@ -55,19 +58,22 @@ public class PermisDao extends AbstractDao {
 	 * */
 	public void update(Permis permis, Form form) {
 		EntityTransaction transaction = em.getTransaction();
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.FRANCE);
-
+	
 		transaction.begin();
 		String nvType = form.getValue("permis type");
-		int nvNumero = Integer.parseInt(form.getValue("numero"));
-		//Date nvDate = form.getValue("numero");
+		String nvNumero = form.getValue("numero");
+		String nvDate = form.getValue("dateObtention");
+		Client client = form.getValue("client");
 		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.FRENCH);
+		LocalDate dateTime = LocalDate.parse(nvDate, formatter);
 
 		Permis permisBase = em.find(Permis.class, permis.getId());
 
 		permisBase.setType(nvType);
 		permisBase.setNumero(nvNumero);
-		permisBase.setDateObtention(null);;
+		permisBase.setDateObtention(dateTime);
+		permisBase.setClient(client);
 		
 		em.persist(permisBase);
 		transaction.commit();

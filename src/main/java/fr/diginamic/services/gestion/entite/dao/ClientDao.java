@@ -67,13 +67,13 @@ public class ClientDao extends AbstractDao {
 		String nvLibelleRue = form.getValue("libelle");
 		int nvCodePostal = Integer.parseInt(form.getValue("code postal"));
 		String nvVille = form.getValue("ville");
-		int nvNumeroTel = Integer.parseInt(form.getValue("numero tel"));
+		String nvNumeroTel = form.getValue("numero tel");
 		String nvEmail = form.getValue("email");
 		
 		
 		Adresse adresse = new Adresse(nvNumeroRue, nvLibelleRue, nvCodePostal, nvVille, nvNumeroTel, nvEmail);
 		
-
+		
 		Client clientBase = em.find(Client.class, client.getId());
 
 		clientBase.setNom(nvNom);;

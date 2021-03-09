@@ -13,14 +13,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import fr.diginamic.composants.ui.Selectable;
+
 @Entity
 @Table(name = "client")
-public class Client {
+public class Client implements Selectable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
-	private int id;
+	private Integer id;
 
 	@Column(name = "nom", nullable = false)
 	private String nom;
@@ -49,7 +51,7 @@ public class Client {
 		this.adresse = adresse;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -95,6 +97,11 @@ public class Client {
 
 	public void setLocation(List<Location> location) {
 		this.location = location;
+	}
+
+	@Override
+	public String toString() {
+		return nom + " " + prenom;
 	}
 
 	

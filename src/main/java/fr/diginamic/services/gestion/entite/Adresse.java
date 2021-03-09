@@ -27,7 +27,7 @@ public class Adresse {
 	private String ville;
 	
 	@Column(name="numéro_téléphone", nullable = false)
-	private int numeroTel;
+	private String numeroTel;
 	
 	@Column(name="email", nullable = false)
 	private String email;
@@ -38,7 +38,7 @@ public class Adresse {
 		super();
 	}
 
-	public Adresse(int numeroRue, String libelleRue, int codePostal, String ville, int numeroTel, String email) {
+	public Adresse(int numeroRue, String libelleRue, int codePostal, String ville, String numeroTel, String email) {
 		super();
 		this.numeroRue = numeroRue;
 		this.libelleRue = libelleRue;
@@ -80,11 +80,11 @@ public class Adresse {
 		this.ville = ville;
 	}
 
-	public int getNumeroTel() {
+	public String getNumeroTel() {
 		return numeroTel;
 	}
 
-	public void setNumeroTel(int numeroTel) {
+	public void setNumeroTel(String numeroTel) {
 		this.numeroTel = numeroTel;
 	}
 
